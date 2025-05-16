@@ -45,7 +45,7 @@ def logout():
     # VULNERABILIDAD POTENCIAL: Si comentamos la siguiente línea,
     # la sesión no se invalida correctamente en el servidor.
     # El cliente podría borrar la cookie, pero el servidor aún la consideraría válida si se reenvía.
-    session.pop('username', None) # Invalida la sesión en el servidor
+    # session.pop('username', None) # Invalida la sesión en el servidor
     # session.clear() # Alternativa para borrar toda la sesión
 
     flash('Has cerrado sesión.', 'info')
@@ -53,4 +53,4 @@ def logout():
 
 if __name__ == '__main__':
     # Nota: debug=True es inseguro para producción, pero útil para desarrollo.
-    app.run(debug=True, port=5001)
+    app.run(host='0.0.0.0', port=5001, debug=True)
