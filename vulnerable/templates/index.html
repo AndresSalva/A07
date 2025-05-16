@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Vulnerable A07</title>
+    <title>App Demo Usuarios - Vulnerable</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenido a la App Vulnerable</h1>
-        <p>Esta aplicación demuestra fallos de Identificación y Autenticación (OWASP A07).</p>
+        <h1>Bienvenido a la App de Demostración de Usuarios</h1>
+        <p>Esta aplicación está diseñada para probar la autenticación y el registro de usuarios.</p>
+        
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -17,7 +18,16 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <p><a href="{{ url_for('login') }}">Iniciar Sesión</a></p>
+
+        <div class="auth-links">
+            {% if session.username %}
+                <p>Hola, <strong>{{ session.username }}</strong>. <a href="{{ url_for('dashboard') }}">Ir al Dashboard</a> | <a href="{{ url_for('logout') }}">Cerrar Sesión</a></p>
+            {% else %}
+                <p><a href="{{ url_for('login') }}">Iniciar Sesión</a> | <a href="{{ url_for('register') }}">Registrarse</a></p>
+            {% endif %}
+        </div>
+        <hr>
+        <p>Explora las opciones de inicio de sesión y registro.</p>
     </div>
 </body>
 </html>
